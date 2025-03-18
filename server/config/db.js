@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
-
+import env from "dotenv"
+env.config()
 /**
  * Connect to MongoDB database
  *
@@ -12,8 +13,9 @@ import mongoose from "mongoose"
  * mongodb+srv://username:password@cluster.mongodb.net/shopmern?retryWrites=true&w=majority
  */
 const connectDB = async () => {
+  const mongoURI = process.env.MONGO_URI || "mongodb://localhost:27017/my-default-db";
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URI, {
+    const conn = await mongoose.connect(mongoURI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
